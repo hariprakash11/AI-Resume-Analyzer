@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 : '<i data-lucide="eye"></i>';
 
         if (window.lucide) {
-            lucide.createIcons();
+            window.lucide.createIcons();
         }
 
     });
