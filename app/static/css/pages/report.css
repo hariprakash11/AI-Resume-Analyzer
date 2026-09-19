@@ -1,0 +1,480 @@
+/* =====================================================
+   REPORT PAGE
+===================================================== */
+
+.report-page {
+    min-height: calc(100vh - 160px);
+    padding: 60px 24px 90px;
+}
+
+
+.report-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.report-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+
+    margin-bottom: 34px;
+}
+
+
+.report-eyebrow {
+    display: inline-flex;
+
+    padding: 7px 12px;
+
+    border: 1px solid rgba(91, 124, 255, 0.25);
+    border-radius: 999px;
+
+    background: rgba(70, 100, 220, 0.08);
+
+    color: #8ea7ff;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+
+.report-header h1 {
+    margin: 14px 0 7px;
+
+    color: #f5f7ff;
+
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+
+.report-header p {
+    margin: 0;
+
+    color: #7e899f;
+
+    font-size: 13px;
+}
+
+
+.report-back {
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 9px;
+
+    color: #aeb7c9;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.report-back:hover {
+    border-color: rgba(91, 124, 255, 0.35);
+
+    background: rgba(91, 124, 255, 0.08);
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
+.report-overview {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 18px;
+
+    margin-bottom: 44px;
+}
+
+
+.report-score-card,
+.report-summary-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 29, 50, 0.94),
+            rgba(11, 16, 30, 0.96)
+        );
+}
+
+
+.report-score-card {
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.report-card-label {
+    color: #758097;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+.report-score {
+    margin: 14px 0 3px;
+
+    color: #f5f7ff;
+
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 800;
+}
+
+
+.report-score-caption {
+    color: #69748a;
+
+    font-size: 11px;
+}
+
+
+.report-summary-card {
+    padding: 30px;
+}
+
+
+.report-summary-card > p {
+    max-width: 620px;
+
+    margin: 18px 0 30px;
+
+    color: #9aa5b9;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+.report-meta {
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    color: #667188;
+
+    font-size: 11px;
+}
+
+
+.report-meta strong {
+    color: #aeb7c9;
+
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.report-section {
+    margin-bottom: 42px;
+}
+
+
+.report-section-header {
+    margin-bottom: 20px;
+}
+
+
+.report-section-header h2 {
+    margin: 12px 0 0;
+
+    color: #eef1f8;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SCORE BREAKDOWN
+===================================================== */
+
+.report-breakdown {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+
+.report-breakdown-item {
+    padding: 17px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 11px;
+
+    background: rgba(15, 21, 37, 0.72);
+}
+
+
+.report-breakdown-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 10px;
+
+    color: #b9c1d0;
+
+    font-size: 12px;
+}
+
+
+.report-breakdown-top strong {
+    color: #e4e8f1;
+
+    font-weight: 600;
+}
+
+
+.report-progress {
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+.report-progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #3478f6;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.report-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+.report-skill {
+    padding: 8px 11px;
+
+    border: 1px solid rgba(91, 124, 255, 0.16);
+    border-radius: 7px;
+
+    background: rgba(70, 100, 220, 0.07);
+
+    color: #aebdff;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   RECOMMENDATIONS
+===================================================== */
+
+.report-recommendations {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.report-recommendation {
+    padding: 17px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 11px;
+
+    background: rgba(15, 21, 37, 0.72);
+}
+
+
+.report-recommendation.warning {
+    border-color: rgba(245, 180, 70, 0.18);
+}
+
+
+.report-recommendation.critical {
+    border-color: rgba(255, 95, 95, 0.18);
+}
+
+
+.report-recommendation.info {
+    border-color: rgba(91, 124, 255, 0.16);
+}
+
+
+.report-recommendation-category {
+    color: #9da8bd;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.report-recommendation p {
+    margin: 8px 0 0;
+
+    color: #a6afc0;
+
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.report-empty {
+    margin: 0;
+
+    color: #69748a;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.report-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    margin-top: 50px;
+}
+
+
+.report-primary-action,
+.report-secondary-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 18px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.report-primary-action {
+    background: #3478f6;
+
+    color: #ffffff;
+}
+
+
+.report-secondary-action {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: #aeb7c9;
+}
+
+
+.report-primary-action:hover,
+.report-secondary-action:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 760px) {
+
+    .report-page {
+        padding: 40px 16px 65px;
+    }
+
+
+    .report-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .report-header h1 {
+        font-size: 32px;
+    }
+
+
+    .report-overview {
+        grid-template-columns: 1fr;
+    }
+
+
+    .report-score-card {
+        min-height: 180px;
+    }
+
+
+    .report-breakdown {
+        grid-template-columns: 1fr;
+    }
+
+
+    .report-actions {
+        flex-direction: column;
+    }
+
+}

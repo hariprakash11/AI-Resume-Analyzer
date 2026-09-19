@@ -1,0 +1,145 @@
+/* ==========================================
+   Hero Section
+========================================== */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    padding-top:100px;
+
+}
+
+.hero-container{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:80px;
+
+    align-items:center;
+
+}
+
+.hero-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    background:rgba(37,99,235,.15);
+
+    border:1px solid rgba(37,99,235,.25);
+
+    color:#7dd3fc;
+
+    border-radius:999px;
+
+    margin-bottom:24px;
+
+    font-size:.9rem;
+
+}
+
+.hero h1{
+
+    margin-bottom:24px;
+
+}
+
+.hero p{
+
+    font-size:1.05rem;
+
+    margin-bottom:35px;
+
+    max-width:550px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+/* Dashboard Card */
+
+.dashboard-preview{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.score-circle{
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+}
+
+.skills{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    justify-content:center;
+
+    margin-top:30px;
+
+}
+
+.skills span{
+
+    background:var(--bg-secondary);
+
+    border:1px solid var(--border);
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    color:var(--text-light);
+
+    font-size:.9rem;
+
+}

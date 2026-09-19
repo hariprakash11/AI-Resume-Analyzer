@@ -1,0 +1,59 @@
+/* ==========================================
+   AI Resume Analyzer Design Tokens
+   ========================================== */
+
+:root{
+
+    /* ===== Colors ===== */
+
+    --bg-primary:#0b1120;
+    --bg-secondary:#111827;
+    --bg-surface:#1e293b;
+
+    --card:#182233;
+
+    --primary:#2563eb;
+    --primary-hover:#1d4ed8;
+
+    --success:#22c55e;
+    --warning:#f59e0b;
+    --danger:#ef4444;
+
+    --text:#f8fafc;
+    --text-light:#cbd5e1;
+    --text-muted:#94a3b8;
+
+    --border:#334155;
+
+    /* ===== Fonts ===== */
+
+    --font-main:'Inter',sans-serif;
+
+    --font-code:'JetBrains Mono',monospace;
+
+    /* ===== Radius ===== */
+
+    --radius-sm:8px;
+    --radius:14px;
+    --radius-lg:20px;
+
+    /* ===== Shadow ===== */
+
+    --shadow-sm:
+    0 2px 8px rgba(0,0,0,.15);
+
+    --shadow:
+    0 10px 30px rgba(0,0,0,.30);
+
+    --shadow-lg:
+    0 20px 50px rgba(0,0,0,.45);
+
+    /* ===== Container ===== */
+
+    --container:1200px;
+
+    /* ===== Animation ===== */
+
+    --transition:.25s ease;
+
+}

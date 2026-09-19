@@ -1,0 +1,421 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+Resume Analysis
+{% endblock %}
+
+{% block content %}
+
+<div class="results-page">
+
+```
+<!-- PAGE HEADER -->
+
+<div class="results-page-header">
+
+    <span class="dashboard-label">
+        RESUME ANALYSIS
+    </span>
+
+    <h1>
+        Your Resume Analysis
+    </h1>
+
+    <p>
+        Here is the ATS analysis of your resume.
+    </p>
+
+</div>
+
+
+<!-- ATS SCORE -->
+
+<section class="results-score-section">
+
+    <div class="results-score-header">
+
+        <span class="dashboard-label">
+            ATS SCORE
+        </span>
+
+        <span class="score-status">
+            ANALYSIS COMPLETE
+        </span>
+
+    </div>
+
+
+    <div
+        class="results-gauge-area"
+        id="atsScoreContainer"
+        data-score="{{ ats_result.score|default(0)|float }}"
+    >
+
+        <div class="results-gauge">
+
+            <svg
+                class="results-progress-ring"
+                width="220"
+                height="220"
+                viewBox="0 0 180 180"
+                aria-label="ATS Score"
+                role="img"
+            >
+
+                <circle
+                    class="results-progress-bg"
+                    cx="90"
+                    cy="90"
+                    r="72"
+                ></circle>
+
+                <circle
+                    class="results-progress-bar"
+                    cx="90"
+                    cy="90"
+                    r="72"
+                ></circle>
+
+            </svg>
+
+
+            <div class="results-score-value">
+
+                <strong id="resultsAtsScore">
+                    0%
+                </strong>
+
+                <span>
+                    ATS SCORE
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="results-score-description">
+
+        <h2>
+            Overall Resume Score
+        </h2>
+
+        <p>
+            Your score is based on the structure,
+            skills, keywords, experience, contact
+            information, readability, and ATS
+            compatibility of your resume.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- SCORE BREAKDOWN -->
+
+<div class="results-section">
+
+    <div class="results-section-header">
+
+        <span class="dashboard-label">
+            PERFORMANCE
+        </span>
+
+        <h2>
+            Score Breakdown
+        </h2>
+
+        <p class="results-section-description">
+            A category-by-category view of how your resume
+            performs against the ATS scoring criteria.
+        </p>
+
+    </div>
+
+
+    <div class="score-grid">
+
+        {% if ats_result and ats_result.categories %}
+
+            {% for category_name, category in ats_result.categories.items() %}
+
+                <div class="score-card">
+
+                    <div class="score-card-header">
+
+                        <div class="score-card-title">
+
+                            <span>
+                                {{ category.label }}
+                            </span>
+
+                        </div>
+
+
+                        <strong class="{{ category.rating_class }}">
+                            {{ category.rating }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="score-card-bar">
+
+                        <div
+                            class="score-card-fill {{ category.rating_class }}"
+                            data-width="{{ category.percentage }}"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="score-card-footer">
+
+                        <span>
+                            {{ category.score }} / {{ category.maximum }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="score-card">
+
+                <div class="score-card-header">
+
+                    <div class="score-card-title">
+
+                        <span>
+                            Analysis
+                        </span>
+
+                    </div>
+
+                    <strong class="critical">
+                        Not Available
+                    </strong>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+
+<!-- DETECTED SKILLS -->
+
+<section class="results-section">
+
+    <div class="results-section-header">
+
+        <span class="dashboard-label">
+            SKILLS
+        </span>
+
+        <h2>
+            Detected Skills
+        </h2>
+
+    </div>
+
+
+    {% if skills %}
+
+        <div class="result-tags">
+
+            {% for skill in skills %}
+
+                <span class="result-tag">
+                    {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p class="results-empty">
+            No recognized skills were detected.
+        </p>
+
+    {% endif %}
+
+</section>
+
+
+
+<!-- RECOMMENDATIONS -->
+
+<section class="results-section">
+
+    <div class="results-section-header">
+
+        <span class="dashboard-label">
+            IMPROVEMENT
+        </span>
+
+        <h2>
+            Recommended Improvements
+        </h2>
+
+        <p class="results-section-description">
+            Honest feedback based on the actual weaknesses
+            detected in your resume.
+        </p>
+
+    </div>
+
+
+    <div class="recommendation-list">
+
+        {% if recommendations %}
+
+            {% for recommendation in recommendations %}
+
+                {% set recommendation_type =
+                    recommendation.type
+                    |default("improvement")
+                    |lower
+                %}
+
+
+                {% if recommendation_type == "critical" %}
+
+                    {% set recommendation_class = "critical" %}
+                    {% set recommendation_label = "CRITICAL" %}
+
+                {% elif recommendation_type == "warning" %}
+
+                    {% set recommendation_class = "warning" %}
+                    {% set recommendation_label = "WARNING" %}
+
+                {% elif recommendation_type == "positive" %}
+
+                    {% set recommendation_class = "positive" %}
+                    {% set recommendation_label = "STRONG" %}
+
+                {% else %}
+
+                    {% set recommendation_class = "improvement" %}
+                    {% set recommendation_label = "IMPROVEMENT" %}
+
+                {% endif %}
+
+
+                <div
+                    class="recommendation-card {{ recommendation_class }}"
+                >
+
+                    <div class="recommendation-content">
+
+                        <div class="recommendation-meta">
+
+                            <span class="recommendation-label">
+                                {{ recommendation_label }}
+                            </span>
+
+                            <span class="recommendation-category">
+                                {{ recommendation.category
+                                    |default("Overall")
+                                    |replace("_", " ")
+                                    |title
+                                }}
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            {{ recommendation.message }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="recommendation-card positive">
+
+                <div class="recommendation-content">
+
+                    <div class="recommendation-meta">
+
+                        <span class="recommendation-label">
+                            STRONG
+                        </span>
+
+                        <span class="recommendation-category">
+                            Overall
+                        </span>
+
+                    </div>
+
+                    <p>
+                        No major issues were detected.
+                        Your resume has a solid ATS foundation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- ANALYZED DOCUMENT -->
+
+<section class="results-section analyzed-resume-section">
+
+    <div class="results-section-header">
+
+        <span class="dashboard-label">
+            DOCUMENT
+        </span>
+
+        <h2>
+            Analyzed Resume
+        </h2>
+
+    </div>
+
+
+    <p class="resume-name">
+        {{ filename }}
+    </p>
+
+
+    <a
+        href="{{ url_for('resume.upload') }}"
+        class="btn btn-primary"
+    >
+        Analyze Another Resume
+    </a>
+
+</section>
+```
+
+</div>
+
+{% endblock %}

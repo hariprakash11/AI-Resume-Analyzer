@@ -1,0 +1,59 @@
+/* ==========================================
+   Footer
+========================================== */
+
+.footer{
+
+    background:var(--bg-secondary);
+
+    border-top:1px solid var(--border);
+
+    margin-top:100px;
+
+}
+
+.footer-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:50px;
+
+    padding:60px 0;
+
+}
+
+.footer-links{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.footer-links a{
+
+    color:var(--text-light);
+
+}
+
+.footer-links a:hover{
+
+    color:var(--primary);
+
+}
+
+.footer-bottom{
+
+    padding:25px 0;
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+    text-align:center;
+
+    color:var(--text-muted);
+
+}

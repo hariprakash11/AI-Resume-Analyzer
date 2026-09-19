@@ -1,0 +1,114 @@
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <!-- Logo -->
+
+        <a
+            href="{{ url_for('home.index') }}"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+                AR
+            </div>
+
+            <div class="logo-text">
+
+                <span>AI Resume</span>
+
+                <small>Analyzer</small>
+
+            </div>
+
+        </a>
+
+
+        <!-- Navigation -->
+
+        <nav class="nav-links">
+
+            <a
+                href="{{ url_for('home.index') }}"
+            >
+                Home
+            </a>
+
+            <a href="{{ url_for('home.index') }}#features">
+                Features
+            </a>
+
+            <a href="{{ url_for('home.index') }}#how-it-works">
+                How It Works
+            </a>
+
+            {% if session.get("user_id") %}
+
+            <a
+                href="{{ url_for('dashboard.index') }}"
+            >
+                Dashboard
+            </a>
+
+            {% endif %}
+
+        </nav>
+
+
+        <!-- Right Buttons -->
+
+        <div class="nav-actions">
+
+            {% if session.get("user_id") %}
+
+                <a
+                    href="{{ url_for('resume.upload') }}"
+                    class="btn btn-primary"
+                >
+                    Analyze Resume
+                </a>
+
+                <a
+                    href="{{ url_for('auth.logout') }}"
+                    class="btn btn-outline"
+                >
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{{ url_for('auth.login') }}"
+                    class="btn btn-outline"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="{{ url_for('auth.register') }}"
+                    class="btn btn-primary"
+                >
+                    Get Started
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Mobile Menu -->
+
+        <button
+            class="menu-toggle"
+            aria-label="Open Menu"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</header>

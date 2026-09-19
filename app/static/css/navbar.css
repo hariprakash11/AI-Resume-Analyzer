@@ -1,0 +1,105 @@
+/* ==========================================
+   Navbar
+========================================== */
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:999;
+
+    background:rgba(11,17,32,.85);
+
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+    transition:var(--transition);
+
+}
+
+.nav-container{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    height:80px;
+
+}
+
+.logo{
+
+    font-size:1.35rem;
+
+    font-weight:800;
+
+    color:var(--text);
+
+    letter-spacing:.5px;
+
+}
+
+.nav-menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:40px;
+
+}
+
+.nav-menu a{
+
+    color:var(--text-light);
+
+    font-weight:500;
+
+    transition:var(--transition);
+
+}
+
+.nav-menu a:hover{
+
+    color:var(--primary);
+
+}
+
+.nav-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.mobile-menu-btn{
+
+    display:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:1.8rem;
+
+}
+
+.navbar.scrolled{
+
+    background:var(--bg-secondary);
+
+    box-shadow:var(--shadow-sm);
+
+}

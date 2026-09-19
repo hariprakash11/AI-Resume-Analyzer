@@ -1,0 +1,367 @@
+{% extends "layouts/base.html" %}
+
+
+{% block title %}
+Resume Analysis Report
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/pages/report.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="report-page">
+
+    <div class="report-container">
+
+
+        <!-- =================================================
+             REPORT HEADER
+        ================================================== -->
+
+        <div class="report-header">
+
+            <div>
+
+                <span class="report-eyebrow">
+                    RESUME ANALYSIS
+                </span>
+
+
+                <h1>
+                    Analysis Report
+                </h1>
+
+
+                <p>
+                    {{ resume.filename }}
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('dashboard.index') }}"
+                class="report-back"
+            >
+                Back to Dashboard
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             REPORT OVERVIEW
+        ================================================== -->
+
+        <div class="report-overview">
+
+
+            <!-- ATS SCORE -->
+
+            <div class="report-score-card">
+
+                <span class="report-card-label">
+                    ATS SCORE
+                </span>
+
+
+                <div class="report-score">
+
+                    {{ "%.0f"|format(ats_result.score) }}
+
+                </div>
+
+
+                <span class="report-score-caption">
+                    Overall resume score
+                </span>
+
+            </div>
+
+
+
+            <!-- SUMMARY -->
+
+            <div class="report-summary-card">
+
+                <span class="report-card-label">
+                    ANALYSIS SUMMARY
+                </span>
+
+
+                <p>
+
+                    This report evaluates your resume across
+                    contact information, experience, skills,
+                    education, projects, certifications,
+                    structure, and measurable impact.
+
+                </p>
+
+
+                <div class="report-meta">
+
+                    <span>
+                        Analyzed
+                    </span>
+
+
+                    <strong>
+
+                        {{ resume.created_at.strftime(
+                            "%d %b %Y, %I:%M %p"
+                        ) }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SCORE BREAKDOWN
+        ================================================== -->
+
+        <div class="report-section">
+
+
+            <div class="report-section-header">
+
+                <span class="report-eyebrow">
+                    SCORE BREAKDOWN
+                </span>
+
+
+                <h2>
+                    How your resume performed
+                </h2>
+
+            </div>
+
+
+
+            <div class="report-breakdown">
+
+                {% for category_name, category in ats_result.categories.items() %}
+
+                <div class="report-breakdown-item">
+
+
+                    <div class="report-breakdown-top">
+
+                        <span>
+                            {{ category.label }}
+                        </span>
+
+
+                        <strong>
+
+                            {{ "%.0f"|format(category.score) }}
+
+                            /
+
+                            {{ "%.0f"|format(category.maximum) }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="report-progress">
+
+                        <div
+                            class="report-progress-fill {{ category.rating_class }}"
+                            style="width: {{ category.percentage }}%;"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <div class="report-breakdown-meta">
+
+                        <span>
+                            {{ category.rating }}
+                        </span>
+
+
+                        <span>
+                            {{ "%.0f"|format(category.percentage) }}%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DETECTED SKILLS
+        ================================================== -->
+
+        <div class="report-section">
+
+
+            <div class="report-section-header">
+
+                <span class="report-eyebrow">
+                    SKILLS
+                </span>
+
+
+                <h2>
+                    Detected skills
+                </h2>
+
+            </div>
+
+
+
+            {% if skills %}
+
+            <div class="report-skills">
+
+                {% for skill in skills %}
+
+                <span class="report-skill">
+                    {{ skill }}
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <p class="report-empty">
+
+                No skills were detected from the resume.
+
+            </p>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =================================================
+             RECOMMENDATIONS
+        ================================================== -->
+
+        <div class="report-section">
+
+
+            <div class="report-section-header">
+
+                <span class="report-eyebrow">
+                    RECOMMENDATIONS
+                </span>
+
+
+                <h2>
+                    What you can improve
+                </h2>
+
+            </div>
+
+
+
+            {% if recommendations %}
+
+            <div class="report-recommendations">
+
+                {% for recommendation in recommendations %}
+
+                <div
+                    class="report-recommendation {{ recommendation.type }}"
+                >
+
+                    <div class="report-recommendation-content">
+
+
+                        <span class="report-recommendation-category">
+
+                            {{ recommendation.category|title }}
+
+                        </span>
+
+
+                        <p>
+
+                            {{ recommendation.message }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <p class="report-empty">
+
+                No recommendations were generated for this analysis.
+
+            </p>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =================================================
+             REPORT ACTIONS
+        ================================================== -->
+
+        <div class="report-actions">
+
+
+            <a
+                href="{{ url_for('resume.upload') }}"
+                class="report-primary-action"
+            >
+                Analyze Another Resume
+            </a>
+
+
+            <a
+                href="{{ url_for('dashboard.index') }}"
+                class="report-secondary-action"
+            >
+                Return to Dashboard
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

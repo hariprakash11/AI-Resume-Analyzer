@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+            AI Resume Analyzer
+        {% endblock %}
+    </title>
+
+    <meta
+        name="description"
+        content="AI Resume Analyzer - Smart Resume Intelligence Platform"
+    >
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         GLOBAL CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/home.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/results.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}"
+    >
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC CSS
+    ====================================================== -->
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="bg-grid"></div>
+
+    <div class="bg-glow glow-one"></div>
+
+    <div class="bg-glow glow-two"></div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    {% include 'includes/navbar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    {% include 'includes/footer.html' %}
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+
+    <!-- =====================================================
+         LUCIDE ICONS
+    ====================================================== -->
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+    ></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC JAVASCRIPT
+    ====================================================== -->
+
+    {% block extra_js %}
+    <script
+        src="{{ url_for('static', filename='js/results.js') }}"
+    ></script>
+    {% endblock %}
+
+
+</body>
+
+</html>

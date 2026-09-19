@@ -1,0 +1,47 @@
+/* ==========================================
+   Forms
+========================================== */
+
+.form-group{
+
+    margin-bottom:22px;
+
+}
+
+.form-label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--text-light);
+
+}
+
+.form-input{
+
+    width:100%;
+
+    height:54px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:var(--bg-secondary);
+
+    color:white;
+
+    padding:0 18px;
+
+    transition:var(--transition);
+
+}
+
+.form-input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+}

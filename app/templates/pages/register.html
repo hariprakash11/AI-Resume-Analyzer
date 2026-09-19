@@ -1,0 +1,162 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- Header -->
+
+        <div class="auth-header">
+
+            <span class="dashboard-label">
+                RESUME INTELLIGENCE
+            </span>
+
+            <h1>
+                Create Your Account
+            </h1>
+
+            <p>
+                Create an account to analyze and improve
+                your resume.
+            </p>
+
+        </div>
+
+
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="flash-messages">
+
+                    {% for category, message in messages %}
+
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- Register Card -->
+
+        <div class="auth-card">
+
+            <form
+                method="POST"
+                action="{{ url_for('auth.register') }}"
+            >
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                    <small class="form-help">
+                        Password must contain at least 8 characters.
+                    </small>
+
+                </div>
+
+
+                <!-- Register Button -->
+
+                <button
+                    type="submit"
+                    class="btn btn-primary auth-submit"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Login Link -->
+
+            <div class="auth-footer">
+
+                <p>
+                    Already have an account?
+
+                    <a href="{{ url_for('auth.login') }}">
+                        Login
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

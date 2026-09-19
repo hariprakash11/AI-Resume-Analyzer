@@ -1,0 +1,582 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+Upload Resume
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/pages/upload.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="upload-page">
+
+    <div class="upload-container">
+
+        <!-- ==========================================
+             PAGE HEADER
+        =========================================== -->
+
+        <div class="upload-header">
+
+            <span class="upload-eyebrow">
+                RESUME ANALYSIS
+            </span>
+
+            <h1>
+                Analyze your resume
+            </h1>
+
+            <p>
+                Upload your resume and get an evidence-based
+                ATS analysis, skill assessment, and actionable
+                recommendations.
+            </p>
+
+        </div>
+
+
+        <!-- ==========================================
+             FLASH MESSAGES
+        =========================================== -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="upload-flash-container">
+
+                    {% for category, message in messages %}
+
+                        <div class="upload-flash {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- ==========================================
+             UPLOAD CARD
+        =========================================== -->
+
+        <div class="upload-card">
+
+            <form
+                method="POST"
+                action="{{ url_for('resume.upload') }}"
+                enctype="multipart/form-data"
+                id="resume-upload-form"
+            >
+
+                <!-- ==================================
+                     DROP ZONE
+                =================================== -->
+
+                <label
+                    for="resume"
+                    class="upload-dropzone"
+                    id="upload-dropzone"
+                >
+
+                    <div class="upload-dropzone-icon">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="28"
+                            height="28"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 16V4"></path>
+
+                            <path d="M7 9l5-5 5 5"></path>
+
+                            <path
+                                d="M20 16.5v2.25A1.75 1.75 0 0 1 18.25 20.5H5.75A1.75 1.75 0 0 1 4 18.75V16.5"
+                            ></path>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="upload-dropzone-content">
+
+                        <h2>
+                            Drop your resume here
+                        </h2>
+
+                        <p>
+                            or
+                        </p>
+
+                        <span class="upload-browse-button">
+                            Browse Files
+                        </span>
+
+                    </div>
+
+
+                    <span class="upload-supported">
+                        PDF, DOCX or TXT
+                    </span>
+
+
+                    <input
+                        type="file"
+                        id="resume"
+                        name="resume"
+                        accept=".pdf,.docx,.txt"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- ==================================
+                     SELECTED FILE
+                =================================== -->
+
+                <div
+                    id="selected-file"
+                    class="selected-file"
+                    aria-live="polite"
+                >
+
+                    <div class="selected-file-icon">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                            ></path>
+
+                            <polyline
+                                points="14 2 14 8 20 8"
+                            ></polyline>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="selected-file-details">
+
+                        <strong
+                            id="selected-file-name"
+                        >
+                        </strong>
+
+                        <span
+                            id="selected-file-meta"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="remove-file"
+                        class="remove-file"
+                        aria-label="Remove selected file"
+                    >
+                        Remove
+                    </button>
+
+                </div>
+
+
+                <!-- ==================================
+                     ANALYZE BUTTON
+                =================================== -->
+
+                <button
+                    type="submit"
+                    class="upload-submit"
+                    id="upload-submit"
+                >
+
+                    <span>
+                        Analyze Resume
+                    </span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M5 12h14"></path>
+                        <path d="m13 6 6 6-6 6"></path>
+                    </svg>
+
+                </button>
+
+
+                <!-- ==================================
+                     TRUST / INFO
+                =================================== -->
+
+                <div class="upload-info">
+
+                    <div class="upload-info-item">
+
+                        <span class="upload-info-title">
+                            ATS Analysis
+                        </span>
+
+                        <span class="upload-info-text">
+                            Structure, skills and evidence
+                        </span>
+
+                    </div>
+
+
+                    <div class="upload-info-divider"></div>
+
+
+                    <div class="upload-info-item">
+
+                        <span class="upload-info-title">
+                            Recommendations
+                        </span>
+
+                        <span class="upload-info-text">
+                            Actionable resume feedback
+                        </span>
+
+                    </div>
+
+
+                    <div class="upload-info-divider"></div>
+
+
+                    <div class="upload-info-item">
+
+                        <span class="upload-info-title">
+                            Evidence-Based
+                        </span>
+
+                        <span class="upload-info-text">
+                            No fabricated achievements
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- ==========================================
+             BOTTOM NOTE
+        =========================================== -->
+
+        <p class="upload-note">
+            Your resume is analyzed locally by the application
+            and the completed analysis is saved to your account history.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input = document.getElementById("resume");
+
+    const dropzone = document.getElementById(
+        "upload-dropzone"
+    );
+
+    const selectedFile = document.getElementById(
+        "selected-file"
+    );
+
+    const selectedFileName = document.getElementById(
+        "selected-file-name"
+    );
+
+    const selectedFileMeta = document.getElementById(
+        "selected-file-meta"
+    );
+
+    const removeFile = document.getElementById(
+        "remove-file"
+    );
+
+    const form = document.getElementById(
+        "resume-upload-form"
+    );
+
+    const submitButton = document.getElementById(
+        "upload-submit"
+    );
+
+
+    function formatFileSize(bytes) {
+
+        if (bytes < 1024) {
+            return bytes + " B";
+        }
+
+        if (bytes < 1024 * 1024) {
+            return (bytes / 1024).toFixed(1) + " KB";
+        }
+
+        return (
+            bytes / (1024 * 1024)
+        ).toFixed(1) + " MB";
+    }
+
+
+    function displayFile(file) {
+
+        if (!file) {
+            selectedFile.classList.remove(
+                "is-visible"
+            );
+
+            submitButton.disabled = true;
+
+            return;
+        }
+
+
+        selectedFileName.textContent =
+            file.name;
+
+
+        selectedFileMeta.textContent =
+            file.type ||
+            file.name.split(".").pop().toUpperCase();
+
+
+        selectedFileMeta.textContent +=
+            " • " +
+            formatFileSize(file.size);
+
+
+        selectedFile.classList.add(
+            "is-visible"
+        );
+
+
+        submitButton.disabled = false;
+    }
+
+
+    input.addEventListener(
+        "change",
+        function () {
+
+            if (input.files.length > 0) {
+
+                displayFile(
+                    input.files[0]
+                );
+
+            }
+
+        }
+    );
+
+
+    removeFile.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            input.value = "";
+
+            selectedFile.classList.remove(
+                "is-visible"
+            );
+
+            submitButton.disabled = true;
+
+        }
+    );
+
+
+    [
+        "dragenter",
+        "dragover"
+    ].forEach(function (eventName) {
+
+        dropzone.addEventListener(
+            eventName,
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                dropzone.classList.add(
+                    "is-dragging"
+                );
+
+            }
+        );
+
+    });
+
+
+    [
+        "dragleave",
+        "drop"
+    ].forEach(function (eventName) {
+
+        dropzone.addEventListener(
+            eventName,
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                dropzone.classList.remove(
+                    "is-dragging"
+                );
+
+            }
+        );
+
+    });
+
+
+    dropzone.addEventListener(
+        "drop",
+        function (event) {
+
+            const files =
+                event.dataTransfer.files;
+
+            if (!files.length) {
+                return;
+            }
+
+
+            const file = files[0];
+
+            const extension =
+                file.name
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            if (
+                ![
+                    "pdf",
+                    "docx",
+                    "txt"
+                ].includes(extension)
+            ) {
+
+                alert(
+                    "Please select a PDF, DOCX or TXT file."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const dataTransfer =
+                    new DataTransfer();
+
+                dataTransfer.items.add(file);
+
+                input.files =
+                    dataTransfer.files;
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to attach dropped file.",
+                    error
+                );
+
+                return;
+            }
+
+
+            displayFile(file);
+
+        }
+    );
+
+
+    form.addEventListener(
+        "submit",
+        function () {
+
+            if (!input.files.length) {
+                return;
+            }
+
+
+            submitButton.disabled = true;
+
+
+            submitButton.querySelector(
+                "span"
+            ).textContent =
+                "Analyzing Resume...";
+
+        }
+    );
+
+
+    submitButton.disabled = true;
+
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+.error-page {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.error-container {
+    width: 100%;
+    max-width: 620px;
+    text-align: center;
+}
+
+.error-code {
+    font-size: clamp(5rem, 15vw, 9rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: rgba(255, 255, 255, 0.08);
+    margin-bottom: 10px;
+}
+
+.error-container h1 {
+    margin: 0 0 16px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.error-container p {
+    max-width: 500px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.error-actions .btn {
+    min-width: 130px;
+}
+
+@media (max-width: 600px) {
+    .error-page {
+        min-height: 65vh;
+        padding: 60px 16px;
+    }
+
+    .error-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .error-container p {
+        font-size: 0.95rem;
+    }
+
+    .error-actions {
+        flex-direction: column;
+    }
+
+    .error-actions .btn {
+        width: 100%;
+        max-width: 220px;
+    }
+}

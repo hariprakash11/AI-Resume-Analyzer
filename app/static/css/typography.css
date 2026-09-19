@@ -1,0 +1,74 @@
+/* ==========================================
+   Typography
+========================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    color:var(--text);
+
+}
+
+h1{
+
+    font-size:clamp(2.5rem,5vw,4.2rem);
+
+}
+
+h2{
+
+    font-size:clamp(2rem,4vw,3rem);
+
+}
+
+h3{
+
+    font-size:1.5rem;
+
+}
+
+p{
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    font-size:1rem;
+
+}
+
+small{
+
+    color:var(--text-muted);
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+.section-subtitle{
+
+    max-width:700px;
+
+    margin:auto;
+
+    text-align:center;
+
+    color:var(--text-muted);
+
+    margin-bottom:70px;
+
+}

@@ -1,0 +1,53 @@
+/* ==========================================
+   Layout
+========================================== */
+
+.container{
+
+    width:min(100% - 40px,var(--container));
+
+    margin:auto;
+
+}
+
+section{
+
+    padding:100px 0;
+
+}
+
+.grid{
+
+    display:grid;
+
+    gap:30px;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.flex-center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.hidden{
+
+    display:none;
+
+}

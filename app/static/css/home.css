@@ -1,0 +1,1804 @@
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    padding: 18px 0;
+
+    backdrop-filter: blur(18px);
+
+    background: rgba(7, 11, 23, 0.55);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    box-shadow:
+        0 0 25px rgba(37, 99, 235, 0.25);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-text span {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.logo-text small {
+    color: #94A3B8;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: #CBD5E1;
+
+    font-weight: 500;
+
+    transition: 0.3s;
+
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-links a.active {
+    color: white;
+}
+
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -10px;
+
+    width: 100%;
+    height: 2px;
+
+    border-radius: 20px;
+
+    background: #3B82F6;
+}
+
+
+/* =====================================================
+   NAVIGATION ACTIONS
+===================================================== */
+
+.nav-actions {
+    display: flex;
+    gap: 15px;
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+.menu-toggle {
+    display: none;
+
+    background: none;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+
+    width: 28px;
+    height: 3px;
+
+    margin: 5px;
+
+    border-radius: 20px;
+
+    background: white;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-top: 120px;
+}
+
+.hero-container {
+    display: grid;
+
+    grid-template-columns: 1.05fr 0.95fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.hero-content h1 {
+    margin: 25px 0;
+}
+
+.hero-content h1 span {
+    background: linear-gradient(
+        135deg,
+        #3B82F6,
+        #7C3AED
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    max-width: 620px;
+
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+.hero-features {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+.hero-features div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #CBD5E1;
+
+    font-weight: 500;
+}
+
+.hero-features svg {
+    width: 18px;
+    height: 18px;
+
+    color: #3B82F6;
+
+    stroke-width: 2;
+}
+
+
+/* =====================================================
+   HERO DASHBOARD
+===================================================== */
+
+.hero-dashboard {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   ATS PREVIEW CARD
+===================================================== */
+
+.ats-card {
+    width: 100%;
+
+    max-width: 480px;
+
+    padding: 30px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 24, 39, 0.96),
+            rgba(11, 17, 31, 0.94)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        0 0 50px rgba(37, 99, 235, 0.08);
+
+    backdrop-filter: blur(25px);
+
+    animation: atsFloat 6s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   ATS CARD LIGHTING
+===================================================== */
+
+.ats-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    top: -180px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59, 130, 246, 0.20),
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    animation: atsLight 8s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+.ats-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 120px;
+
+    bottom: -100px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: rgba(124, 58, 237, 0.15);
+
+    filter: blur(50px);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   ATS HEADER
+===================================================== */
+
+.ats-header {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+}
+
+.ats-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #64748B;
+
+    font-size: 0.68rem;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.ats-heading h3 {
+    color: #F8FAFC;
+
+    font-size: 1.15rem;
+
+    font-weight: 650;
+}
+
+
+/* =====================================================
+   AI READY STATUS
+===================================================== */
+
+.status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(34, 197, 94, 0.15);
+
+    background: rgba(34, 197, 94, 0.07);
+
+    color: #86EFAC;
+
+    font-size: 0.72rem;
+
+    white-space: nowrap;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #22C55E;
+
+    box-shadow:
+        0 0 8px rgba(34, 197, 94, 0.7);
+
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   ATS GAUGE
+===================================================== */
+
+.gauge-area {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 25px 0 18px;
+}
+
+.gauge {
+    position: relative;
+
+    width: 190px;
+    height: 190px;
+}
+
+.progress-ring {
+    width: 190px;
+    height: 190px;
+
+    transform: rotate(-90deg);
+
+    overflow: visible;
+}
+
+.progress-bg {
+    fill: none;
+
+    stroke: #1E293B;
+
+    stroke-width: 11;
+}
+
+.progress-bar {
+    fill: none;
+
+    stroke: url(#atsGradient);
+
+    stroke-width: 11;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 452;
+
+    stroke-dashoffset: 452;
+
+    filter:
+        drop-shadow(
+            0 0 7px rgba(59, 130, 246, 0.45)
+        );
+
+    transition:
+        stroke-dashoffset 2s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+}
+
+
+/* =====================================================
+   ATS SCORE
+===================================================== */
+
+.score {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.score-number {
+    color: #F8FAFC;
+
+    font-size: 3rem;
+
+    line-height: 1;
+
+    font-weight: 750;
+
+    letter-spacing: -2px;
+}
+
+.score-label {
+    margin-top: 8px;
+
+    color: #64748B;
+
+    font-size: 0.8rem;
+}
+
+
+/* =====================================================
+   SCORE SUMMARY
+===================================================== */
+
+.score-summary {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    margin: 5px 0 25px;
+
+    padding: 17px 0;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.score-summary > div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.score-summary > div + div {
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.summary-value {
+    color: #F8FAFC;
+
+    font-size: 1.05rem;
+
+    font-weight: 700;
+}
+
+.summary-label {
+    margin-top: 3px;
+
+    color: #64748B;
+
+    font-size: 0.68rem;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skills {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 22px;
+}
+
+.skills-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 11px;
+}
+
+.skills-heading h4 {
+    color: #CBD5E1;
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+}
+
+.skills-heading span {
+    color: #64748B;
+
+    font-size: 0.68rem;
+}
+
+.tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.tags span {
+    padding: 6px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    border-radius: 8px;
+
+    background: #172033;
+
+    color: #94A3B8;
+
+    font-size: 0.68rem;
+
+    transition: 0.25s ease;
+}
+
+.tags span:hover {
+    border-color: rgba(59, 130, 246, 0.35);
+
+    color: #CBD5E1;
+}
+
+.warning span {
+    background: rgba(245, 158, 11, 0.06);
+
+    border-color: rgba(245, 158, 11, 0.12);
+
+    color: #D6A85C;
+}
+
+
+/* =====================================================
+   FEATURES SECTION
+===================================================== */
+
+.features {
+    padding: 120px 0;
+}
+
+.section-title {
+    text-align: center;
+
+    max-width: 760px;
+
+    margin: 0 auto 70px;
+}
+
+.section-title h2 {
+    margin: 20px 0;
+
+    font-size: 2.8rem;
+}
+
+.section-title h2 span {
+    background:
+        linear-gradient(
+            90deg,
+            #3B82F6,
+            #7C3AED
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.section-title p {
+    color: #94A3B8;
+
+    font-size: 1.05rem;
+}
+
+
+/* =====================================================
+   FEATURE GRID
+===================================================== */
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 28px;
+}
+
+
+/* =====================================================
+   FEATURE CARD
+===================================================== */
+
+.feature-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        rgba(17, 24, 39, 0.85);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(18px);
+
+    border-radius: 24px;
+
+    padding: 35px;
+
+    transition: 0.35s;
+}
+
+.feature-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(59, 130, 246, 0.08),
+            transparent
+        );
+
+    transform: translateX(-100%);
+
+    transition: 0.6s;
+
+    pointer-events: none;
+}
+
+.feature-card:hover::before {
+    transform: translateX(100%);
+}
+
+.feature-card:hover {
+    transform: translateY(-12px);
+
+    border-color: #3B82F6;
+
+    box-shadow:
+        0 20px 50px rgba(37, 99, 235, 0.18);
+}
+
+
+/* =====================================================
+   FEATURE ICON
+===================================================== */
+
+.feature-icon {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+    background:
+        rgba(37, 99, 235, 0.12);
+
+    color: #3B82F6;
+}
+
+.feature-icon svg {
+    width: 30px;
+    height: 30px;
+
+    stroke-width: 2;
+}
+
+
+/* =====================================================
+   FEATURE TEXT
+===================================================== */
+
+.feature-card h3 {
+    margin-bottom: 15px;
+
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: #94A3B8;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes atsFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes atsLight {
+
+    0% {
+        transform: translate(0, 0);
+
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translate(-70px, 80px);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+
+        opacity: 0.6;
+    }
+
+}
+
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+
+}
+
+
+/* =====================================================
+   GENERAL FADE ANIMATION
+===================================================== */
+
+.fade-up {
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    animation:
+        fadeUp 0.9s ease forwards;
+}
+
+@keyframes fadeUp {
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 992px) {
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+
+        gap: 60px;
+
+        text-align: center;
+    }
+
+    .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-features {
+        justify-content: center;
+    }
+
+    .hero-dashboard {
+        margin-bottom: 40px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 14px 0;
+    }
+
+    .nav-links,
+    .nav-actions {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hero {
+        padding-top: 110px;
+    }
+
+    .hero-container {
+        gap: 45px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        max-width: 320px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+    }
+
+    .hero-features {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 12px;
+    }
+
+    .ats-card {
+        padding: 24px;
+
+        max-width: 440px;
+    }
+
+    .features {
+        padding: 80px 0;
+    }
+
+    .section-title {
+        margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+        font-size: 2.2rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .feature-card {
+        padding: 28px;
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - SMALL PHONES
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 12px;
+    }
+
+    .logo-text span {
+        font-size: 0.9rem;
+    }
+
+    .logo-text small {
+        font-size: 0.65rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .badge {
+        font-size: 0.72rem;
+
+        padding: 7px 13px;
+    }
+
+    .ats-card {
+        padding: 20px;
+
+        border-radius: 23px;
+    }
+
+    .ats-header {
+        gap: 10px;
+    }
+
+    .status {
+        padding: 6px 9px;
+
+        font-size: 0.65rem;
+    }
+
+    .gauge,
+    .progress-ring {
+        width: 165px;
+        height: 165px;
+    }
+
+    .score-number {
+        font-size: 2.5rem;
+    }
+
+    .score-summary {
+        margin-bottom: 20px;
+    }
+
+    .summary-value {
+        font-size: 0.95rem;
+    }
+
+    .summary-label {
+        font-size: 0.6rem;
+    }
+
+    .tags span {
+        font-size: 0.63rem;
+
+        padding: 5px 8px;
+    }
+
+}
+
+/* =====================================================
+   FEATURES SECTION
+===================================================== */
+
+.features {
+    padding: 120px 0;
+    position: relative;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 70px;
+}
+
+.section-title h2 {
+    margin: 22px 0 18px;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.section-title h2 span {
+    background: linear-gradient(
+        90deg,
+        #3B82F6,
+        #7C3AED
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-title p {
+    color: #94A3B8;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   FEATURE GRID
+===================================================== */
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 28px;
+}
+
+
+/* =====================================================
+   FEATURE CARD
+===================================================== */
+
+.feature-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 35px;
+
+    min-height: 280px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(17, 24, 39, 0.82);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    backdrop-filter: blur(18px);
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+/* Moving highlight */
+
+.feature-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(59, 130, 246, 0.07),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition:
+        left 0.7s ease;
+}
+
+
+/* Hover */
+
+.feature-card:hover::before {
+    left: 140%;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(59, 130, 246, 0.45);
+
+    box-shadow:
+        0 20px 50px
+        rgba(37, 99, 235, 0.12);
+}
+
+
+/* =====================================================
+   FEATURE ICON
+===================================================== */
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(37, 99, 235, 0.10);
+
+    border:
+        1px solid
+        rgba(59, 130, 246, 0.12);
+
+    color: #3B82F6;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: translateY(-3px);
+
+    background:
+        rgba(37, 99, 235, 0.16);
+}
+
+.feature-icon svg {
+    width: 29px;
+    height: 29px;
+
+    stroke-width: 1.8;
+}
+
+
+/* =====================================================
+   FEATURE CONTENT
+===================================================== */
+
+.feature-card h3 {
+    position: relative;
+
+    margin-bottom: 14px;
+
+    font-size: 1.25rem;
+
+    font-weight: 700;
+}
+
+.feature-card p {
+    position: relative;
+
+    color: #94A3B8;
+
+    line-height: 1.75;
+
+    font-size: 0.95rem;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 992px) {
+
+    .feature-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 640px) {
+
+    .features {
+        padding: 80px 0;
+    }
+
+    .section-title {
+        margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+    }
+
+    .section-title p {
+        font-size: 0.95rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .feature-card {
+        padding: 28px;
+
+        min-height: auto;
+    }
+
+}
+
+/* =====================================================
+   HOW IT WORKS
+===================================================== */
+
+.how-it-works {
+    padding: 120px 0;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   STEPS CONTAINER
+===================================================== */
+
+.steps-container {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 24px;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   STEP CARD
+===================================================== */
+
+.step-card {
+
+    position: relative;
+
+    padding: 32px;
+
+    min-height: 310px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(17, 24, 39, 0.78);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    backdrop-filter: blur(18px);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.step-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(59, 130, 246, 0.4);
+
+    box-shadow:
+        0 20px 45px
+        rgba(37, 99, 235, 0.12);
+}
+
+
+/* =====================================================
+   STEP NUMBER
+===================================================== */
+
+.step-number {
+
+    position: absolute;
+
+    top: 24px;
+
+    right: 26px;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(148, 163, 184, 0.5);
+}
+
+
+/* =====================================================
+   STEP ICON
+===================================================== */
+
+.step-icon {
+
+    width: 62px;
+
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 28px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(37, 99, 235, 0.10);
+
+    border:
+        1px solid
+        rgba(59, 130, 246, 0.12);
+
+    color: #3B82F6;
+}
+
+
+.step-icon svg {
+
+    width: 28px;
+
+    height: 28px;
+
+    stroke-width: 1.8;
+}
+
+
+/* =====================================================
+   STEP CONTENT
+===================================================== */
+
+.step-card h3 {
+
+    margin-bottom: 14px;
+
+    font-size: 1.2rem;
+
+    font-weight: 700;
+}
+
+
+.step-card p {
+
+    color: #94A3B8;
+
+    line-height: 1.75;
+
+    font-size: 0.94rem;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 992px) {
+
+    .steps-container {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+@media (max-width: 640px) {
+
+    .how-it-works {
+
+        padding: 80px 0;
+
+    }
+
+    .steps-container {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+    }
+
+    .step-card {
+
+        min-height: auto;
+
+        padding: 28px;
+
+    }
+
+}
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.final-cta {
+    padding: 80px 0 120px;
+}
+
+
+/* =====================================================
+   CTA CARD
+===================================================== */
+
+.cta-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 70px 50px;
+
+    border-radius: 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17, 24, 39, 0.95),
+            rgba(20, 27, 48, 0.90)
+        );
+
+    border:
+        1px solid
+        rgba(59, 130, 246, 0.16);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+/* Soft moving light */
+
+.cta-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    top: -240px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59, 130, 246, 0.16),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    animation:
+        ctaGlow 8s ease-in-out infinite;
+}
+
+
+.cta-content {
+
+    position: relative;
+
+    z-index: 1;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   CTA HEADING
+===================================================== */
+
+.cta-content h2 {
+
+    margin: 22px 0 18px;
+
+    font-size: 2.8rem;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.cta-content h2 span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #3B82F6,
+            #7C3AED
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+.cta-content p {
+
+    max-width: 650px;
+
+    margin: 0 auto 32px;
+
+    color: #94A3B8;
+
+    line-height: 1.8;
+
+    font-size: 1rem;
+}
+
+
+/* =====================================================
+   CTA BUTTONS
+===================================================== */
+
+.cta-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+/* =====================================================
+   CTA ANIMATION
+===================================================== */
+
+@keyframes ctaGlow {
+
+    0%,
+    100% {
+
+        opacity: 0.7;
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            scale(1.15);
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 640px) {
+
+    .final-cta {
+
+        padding:
+            60px 0 80px;
+
+    }
+
+    .cta-card {
+
+        padding:
+            50px 24px;
+
+        border-radius: 24px;
+
+    }
+
+    .cta-content h2 {
+
+        font-size: 2rem;
+
+    }
+
+    .cta-content p {
+
+        font-size: 0.94rem;
+
+    }
+
+    .cta-actions {
+
+        flex-direction: column;
+
+        width: 100%;
+
+    }
+
+    .cta-actions .btn {
+
+        width: 100%;
+
+    }
+
+}

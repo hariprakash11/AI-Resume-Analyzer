@@ -1,0 +1,552 @@
+{% extends "layouts/base.html" %}
+
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/pages/dashboard.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="dashboard-container">
+
+
+        <!-- =================================================
+             DASHBOARD HEADER
+        ================================================== -->
+
+        <div class="dashboard-header">
+
+            <div class="dashboard-header-content">
+
+                <span class="dashboard-eyebrow">
+                    RESUME INTELLIGENCE
+                </span>
+
+
+                <h1>
+                    Welcome back,
+                    <span>{{ user_name }}</span>
+                </h1>
+
+
+                <p>
+                    Analyze your resume, review previous results,
+                    and track your ATS performance in one place.
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-header-actions">
+
+                <a
+                    href="{{ url_for('resume.upload') }}"
+                    class="dashboard-primary-button"
+                >
+
+                    <span>
+                        Analyze Resume
+                    </span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="17"
+                        height="17"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+
+                        <path d="M5 12h14"></path>
+
+                        <path d="m13 6 6 6-6 6"></path>
+
+                    </svg>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        {% if resumes %}
+
+
+        <!-- =================================================
+             SUMMARY CARDS
+        ================================================== -->
+
+        <div class="dashboard-summary">
+
+
+            <!-- Latest Score -->
+
+            <div class="dashboard-summary-card score-summary">
+
+                <div class="summary-card-top">
+
+                    <span class="summary-card-label">
+                        LATEST ATS SCORE
+                    </span>
+
+
+                    <div class="summary-card-icon">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="19"
+                            height="19"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <path d="M12 2v20"></path>
+
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-score">
+
+                    {{ "%.0f"|format(resumes[0].ats_score) }}
+
+                    <span>
+                        / 100
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card-footer">
+
+                    <span>
+                        Most recent analysis
+                    </span>
+
+                    <span class="summary-status">
+                        Recorded
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Total Analyses -->
+
+            <div class="dashboard-summary-card">
+
+                <div class="summary-card-top">
+
+                    <span class="summary-card-label">
+                        TOTAL ANALYSES
+                    </span>
+
+
+                    <div class="summary-card-icon">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="19"
+                            height="19"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+
+                            <polyline points="14 2 14 8 20 8"></polyline>
+
+                            <line x1="8" y1="13" x2="16" y2="13"></line>
+
+                            <line x1="8" y1="17" x2="13" y2="17"></line>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-large-value">
+
+                    {{ resumes|length }}
+
+                </div>
+
+
+                <div class="summary-card-footer">
+
+                    <span>
+                        Saved resume analyses
+                    </span>
+
+                    <span class="summary-status">
+                        History
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Latest Resume -->
+
+            <div class="dashboard-summary-card">
+
+                <div class="summary-card-top">
+
+                    <span class="summary-card-label">
+                        LATEST RESUME
+                    </span>
+
+
+                    <div class="summary-card-icon">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="19"
+                            height="19"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path>
+
+                            <path d="M14 2v6h6"></path>
+
+                            <path d="M8 13h8"></path>
+
+                            <path d="M8 17h5"></path>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-file-name">
+
+                    {{ resumes[0].filename }}
+
+                </div>
+
+
+                <div class="summary-card-footer">
+
+                    <span>
+                        Latest uploaded resume
+                    </span>
+
+                    <span class="summary-status">
+                        Active
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             ANALYSIS HISTORY
+        ================================================== -->
+
+        <section class="dashboard-history-section">
+
+
+            <div class="dashboard-section-heading">
+
+                <div>
+
+                    <span class="dashboard-eyebrow">
+                        HISTORY
+                    </span>
+
+
+                    <h2>
+                        Previous Analyses
+                    </h2>
+
+
+                    <p>
+                        Review your saved resume analysis results.
+                    </p>
+
+                </div>
+
+
+                <span class="history-count">
+
+                    {{ resumes|length }}
+
+                    {% if resumes|length == 1 %}
+                        Analysis
+                    {% else %}
+                        Analyses
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+
+            <div class="analysis-history">
+
+
+                {% for resume in resumes %}
+
+                <article class="analysis-row">
+
+
+                    <!-- Resume -->
+
+                    <div class="analysis-resume">
+
+                        <div class="analysis-file-icon">
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+
+                                <polyline points="14 2 14 8 20 8"></polyline>
+
+                                <line x1="8" y1="13" x2="16" y2="13"></line>
+
+                                <line x1="8" y1="17" x2="13" y2="17"></line>
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="analysis-resume-info">
+
+                            <h3>
+                                {{ resume.filename }}
+                            </h3>
+
+
+                            <p>
+
+                                Analyzed on
+
+                                {{ resume.created_at.strftime(
+                                    "%d %b %Y, %I:%M %p"
+                                ) }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Score -->
+
+                    <div class="analysis-score">
+
+                        <span class="analysis-score-value">
+
+                            {{ "%.0f"|format(resume.ats_score) }}
+
+                        </span>
+
+
+                        <span class="analysis-score-label">
+                            ATS Score
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Action -->
+
+                    <div class="analysis-action">
+
+                        <a
+                            href="{{ url_for(
+                                'report.view_report',
+                                resume_id=resume.id
+                            ) }}"
+                            class="view-report-button"
+                        >
+
+                            View Report
+
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path d="M5 12h14"></path>
+
+                                <path d="m13 6 6 6-6 6"></path>
+
+                            </svg>
+
+                        </a>
+
+                    </div>
+
+
+                </article>
+
+                {% endfor %}
+
+
+            </div>
+
+        </section>
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             EMPTY DASHBOARD
+        ================================================== -->
+
+        <section class="dashboard-empty">
+
+            <div class="empty-icon">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+
+                    <polyline points="14 2 14 8 20 8"></polyline>
+
+                    <line x1="8" y1="13" x2="16" y2="13"></line>
+
+                    <line x1="8" y1="17" x2="13" y2="17"></line>
+
+                </svg>
+
+            </div>
+
+
+            <span class="dashboard-eyebrow">
+                GET STARTED
+            </span>
+
+
+            <h2>
+                No resume analyses yet
+            </h2>
+
+
+            <p>
+                Upload your resume to receive an ATS score,
+                detailed analysis, and actionable recommendations.
+            </p>
+
+
+            <a
+                href="{{ url_for('resume.upload') }}"
+                class="dashboard-primary-button"
+            >
+                Analyze Your Resume
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path d="M5 12h14"></path>
+
+                    <path d="m13 6 6 6-6 6"></path>
+
+                </svg>
+
+            </a>
+
+        </section>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+{% endblock %}
