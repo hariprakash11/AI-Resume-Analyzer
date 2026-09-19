@@ -24,14 +24,35 @@ class Config:
     # DATABASE
     # =====================================================
 
-    SQLALCHEMY_DATABASE_URI = (
-        "sqlite:///"
-        + os.path.join(
-            BASE_DIR,
-            "instance",
-            "resume.db"
+    DATABASE_URL = os.getenv("DATABASE_URL")
+
+    if DATABASE_URL:
+
+        # Render and some PostgreSQL providers may expose
+        # the connection string using the postgres:// scheme.
+        # SQLAlchemy expects postgresql://.
+
+        if DATABASE_URL.startswith("postgres://"):
+
+            DATABASE_URL = DATABASE_URL.replace(
+                "postgres://",
+                "postgresql://",
+                1
+            )
+
+        SQLALCHEMY_DATABASE_URI = DATABASE_URL
+
+    else:
+
+        SQLALCHEMY_DATABASE_URI = (
+            "sqlite:///"
+            + os.path.join(
+                BASE_DIR,
+                "instance",
+                "resume.db"
+            )
         )
-    )
+
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -59,5 +80,7 @@ class Config:
     SESSION_COOKIE_SAMESITE = "Lax"
 
     # False for local HTTP development.
-    # Change to True when deployed over HTTPS.
+    # Production HTTPS can enable this through
+    # an environment-specific configuration later.
+
     SESSION_COOKIE_SECURE = False
