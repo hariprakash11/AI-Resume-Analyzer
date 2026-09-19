@@ -30,19 +30,31 @@ class Config:
 
         # Render and some PostgreSQL providers may expose
         # the connection string using the postgres:// scheme.
-        # SQLAlchemy expects postgresql://.
+        # SQLAlchemy with Psycopg 3 uses:
+        # postgresql+psycopg://
 
         if DATABASE_URL.startswith("postgres://"):
 
             DATABASE_URL = DATABASE_URL.replace(
                 "postgres://",
+                "postgresql+psycopg://",
+                1
+            )
+
+        elif DATABASE_URL.startswith("postgresql://"):
+
+            DATABASE_URL = DATABASE_URL.replace(
                 "postgresql://",
+                "postgresql+psycopg://",
                 1
             )
 
         SQLALCHEMY_DATABASE_URI = DATABASE_URL
 
     else:
+
+        # Local development fallback.
+        # Uses the existing SQLite database.
 
         SQLALCHEMY_DATABASE_URI = (
             "sqlite:///"
