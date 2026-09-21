@@ -883,11 +883,12 @@ def upload():
     try:
 
         recommendations = generate_recommendations(
-            sections,
-            skills,
-            ats_analysis,
-            ats_result
-        )
+            sections=sections,
+            skills=skills,
+            ats_analysis=ats_analysis,
+            ats_result=ats_result,
+            resume_text=resume_text,
+)
 
     except Exception as error:
 

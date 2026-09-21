@@ -1,5 +1,4 @@
-﻿
-"""
+﻿"""
 Resume Recommendation Engine
 
 Generates actionable, evidence-based recommendations from ATS analysis.
@@ -246,6 +245,7 @@ def _has_date_information(text):
     text = str(text)
 
     date_patterns = [
+
         # Four-digit year.
         r"\b(?:19|20)\d{2}\b",
 
@@ -385,6 +385,7 @@ def _has_measurable_impact(text):
     # 95% accuracy
     # 200ms latency
     # 500 requests/sec
+
     reverse_metric_pattern = re.compile(
         r"\b\d+(?:\.\d+)?\s*"
         r"(?:"
@@ -560,22 +561,27 @@ def generate_recommendations(
             "Add a professional summary that clearly explains "
             "your background, strongest skills, and target role."
         ),
+
         "skills": (
             "Add a dedicated Skills section containing the technical "
             "skills that are relevant to your target role."
         ),
+
         "experience": (
             "Add relevant work experience, internships, or practical "
             "experience where applicable."
         ),
+
         "education": (
             "Add your education details, including degree, institution, "
             "and relevant academic information."
         ),
+
         "projects": (
             "Add relevant projects that demonstrate your technical "
             "skills and practical experience."
         ),
+
         "certifications": (
             "Add relevant certifications, courses, or credentials "
             "that support your target role."
@@ -916,7 +922,7 @@ def generate_recommendations(
         resume_text or ""
     )
 
-    if not contact_text:
+    if not contact_text.strip():
 
         contact_text = "\n".join(
             [
@@ -929,21 +935,71 @@ def generate_recommendations(
             ]
         )
 
-    contact_lower = contact_text.lower()
+    # -----------------------------------------------------------------------
+    # Email detection
+    # -----------------------------------------------------------------------
 
-    has_email = (
-        "@" in contact_text
+    has_email = bool(
+        re.search(
+            r"\b[A-Za-z0-9._%+-]+@"
+            r"[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b",
+            contact_text,
+            re.IGNORECASE,
+        )
     )
 
-    has_phone = any(
-        char.isdigit()
-        for char in contact_text
+    # -----------------------------------------------------------------------
+    # Phone detection
+    # -----------------------------------------------------------------------
+
+    has_phone = bool(
+        re.search(
+            r"(?:\+?\d[\d\s().-]{8,}\d)",
+            contact_text,
+        )
     )
 
-    has_linkedin = (
-        "linkedin.com"
-        in contact_lower
+    # -----------------------------------------------------------------------
+    # LinkedIn detection
+    # -----------------------------------------------------------------------
+
+    has_linkedin = bool(
+        re.search(
+            r"(?:https?://)?(?:www\.)?"
+            r"linkedin\.com/[^\s]+",
+            contact_text,
+            re.IGNORECASE,
+        )
     )
+
+    # -----------------------------------------------------------------------
+    # GitHub detection
+    # -----------------------------------------------------------------------
+
+    has_github = bool(
+        re.search(
+            r"(?:https?://)?(?:www\.)?"
+            r"github\.com/[^\s]+",
+            contact_text,
+            re.IGNORECASE,
+        )
+    )
+
+    # -----------------------------------------------------------------------
+    # Portfolio detection
+    # -----------------------------------------------------------------------
+
+    has_portfolio = bool(
+        re.search(
+            r"\bportfolio\b",
+            contact_text,
+            re.IGNORECASE,
+        )
+    )
+
+    # -----------------------------------------------------------------------
+    # Contact recommendations
+    # -----------------------------------------------------------------------
 
     if not has_email:
 
@@ -972,6 +1028,17 @@ def generate_recommendations(
             "Add your LinkedIn profile if you have one, using a clean and professional profile URL.",
         )
 
+    # GitHub and portfolio are optional supporting links.
+    # Give one combined recommendation only when neither is detected.
+    if not has_github and not has_portfolio:
+
+        _add(
+            recommendations,
+            "info",
+            "contact",
+            "Your resume does not include a GitHub or portfolio link. If you have one, consider adding it to showcase your projects and technical work.",
+        )
+
     # -----------------------------------------------------------------------
     # Impact / measurable evidence
     # -----------------------------------------------------------------------
@@ -991,11 +1058,11 @@ def generate_recommendations(
     ):
 
         _add(
-    recommendations,
-    "warning",
-    "impact",
-    "Your resume explains what you did, but it doesn't clearly show the results of your work. Add real numbers where possible, such as model accuracy, records processed, users supported, time saved, or performance improvements. Do not add numbers unless you can support them."
-)
+            recommendations,
+            "warning",
+            "impact",
+            "Your resume explains what you did, but it doesn't clearly show the results of your work. Add real numbers where possible, such as model accuracy, records processed, users supported, time saved, or performance improvements. Do not add numbers unless you can support them.",
+        )
 
     # -----------------------------------------------------------------------
     # Project quality
@@ -1073,7 +1140,6 @@ def generate_recommendations(
 
             _add(
                 recommendations,
-                "" \
                 "info",
                 "projects",
                 "Your projects explain what you built, but they don't show the results you achieved. If you have real results, mention them—for example, model accuracy, dataset size, number of users, processing time, or performance improvements. Do not make up results.",

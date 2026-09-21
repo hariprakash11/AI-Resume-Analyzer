@@ -1,4 +1,3 @@
-
 """
 ATS Resume Scoring Engine
 
@@ -53,7 +52,9 @@ RATING_BANDS = (
 # SECTION HELPERS
 # ============================================================
 
-def _get_resume_sections(sections: Dict[str, Any]) -> Dict[str, Any]:
+def _get_resume_sections(
+    sections: Dict[str, Any],
+) -> Dict[str, Any]:
     """Handle both flat and nested section structures."""
 
     if not sections:
@@ -73,9 +74,13 @@ def _section_exists(
 ) -> bool:
     """Return True when a section contains meaningful content."""
 
-    resume_sections = _get_resume_sections(sections)
+    resume_sections = _get_resume_sections(
+        sections
+    )
 
-    value = resume_sections.get(section_name)
+    value = resume_sections.get(
+        section_name
+    )
 
     if value is None:
         return False
@@ -83,13 +88,23 @@ def _section_exists(
     if isinstance(value, dict):
 
         if "present" in value:
-            return bool(value.get("present"))
+            return bool(
+                value.get("present")
+            )
 
         return bool(
-            str(value.get("text", "") or "").strip()
+            str(
+                value.get(
+                    "text",
+                    "",
+                )
+                or ""
+            ).strip()
         )
 
-    return bool(str(value).strip())
+    return bool(
+        str(value).strip()
+    )
 
 
 def _section_text(
@@ -98,14 +113,27 @@ def _section_text(
 ) -> str:
     """Safely extract text from a resume section."""
 
-    resume_sections = _get_resume_sections(sections)
+    resume_sections = _get_resume_sections(
+        sections
+    )
 
-    value = resume_sections.get(section_name, "")
+    value = resume_sections.get(
+        section_name,
+        "",
+    )
 
     if isinstance(value, dict):
-        return str(value.get("text", "") or "")
+        return str(
+            value.get(
+                "text",
+                "",
+            )
+            or ""
+        )
 
-    return str(value or "")
+    return str(
+        value or ""
+    )
 
 
 # ============================================================
@@ -138,9 +166,13 @@ def _score_contact(
         r"[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"
     )
 
-    phone_pattern = r"(?:\+?\d[\d\s().-]{8,}\d)"
+    phone_pattern = (
+        r"(?:\+?\d[\d\s().-]{8,}\d)"
+    )
 
-    linkedin_pattern = r"linkedin\.com"
+    linkedin_pattern = (
+        r"linkedin\.com"
+    )
 
     location_pattern = (
         r"\b("
@@ -149,16 +181,31 @@ def _score_contact(
         r")\b"
     )
 
-    if re.search(email_pattern, text, re.I):
+    if re.search(
+        email_pattern,
+        text,
+        re.I,
+    ):
         score += 3
 
-    if re.search(phone_pattern, text):
+    if re.search(
+        phone_pattern,
+        text,
+    ):
         score += 3
 
-    if re.search(linkedin_pattern, text, re.I):
+    if re.search(
+        linkedin_pattern,
+        text,
+        re.I,
+    ):
         score += 2
 
-    if re.search(location_pattern, text, re.I):
+    if re.search(
+        location_pattern,
+        text,
+        re.I,
+    ):
         score += 1
 
     # Do NOT count a generic "www." as a portfolio.
@@ -171,7 +218,122 @@ def _score_contact(
     ):
         score += 1
 
-    return min(score, 10)
+    return min(
+        score,
+        10,
+    )
+
+
+# ============================================================
+# CONTACT DETAILS
+# ============================================================
+
+def _get_contact_details(
+    resume_text: str,
+) -> Dict[str, Any]:
+    """
+    Detect individual contact elements for transparent scoring.
+
+    This function does not calculate the score.
+    It only explains which contact elements were detected
+    and which were not.
+
+    Scoring remains controlled by _score_contact().
+    """
+
+    text = resume_text or ""
+
+    email_detected = bool(
+        re.search(
+            r"\b[A-Za-z0-9._%+-]+@"
+            r"[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b",
+            text,
+            re.I,
+        )
+    )
+
+    phone_detected = bool(
+        re.search(
+            r"(?:\+?\d[\d\s().-]{8,}\d)",
+            text,
+        )
+    )
+
+    linkedin_detected = bool(
+        re.search(
+            r"(?:https?://)?(?:www\.)?"
+            r"linkedin\.com/[^\s]+",
+            text,
+            re.I,
+        )
+    )
+
+    location_detected = bool(
+        re.search(
+            r"\b("
+            r"chennai|bangalore|bengaluru|hyderabad|mumbai|delhi|"
+            r"pune|kolkata|coimbatore|madurai|india|tamil nadu"
+            r")\b",
+            text,
+            re.I,
+        )
+    )
+
+    portfolio_detected = bool(
+        re.search(
+            r"\bportfolio\b",
+            text,
+            re.I,
+        )
+    )
+
+    detected_count = sum(
+        [
+            email_detected,
+            phone_detected,
+            linkedin_detected,
+            location_detected,
+            portfolio_detected,
+        ]
+    )
+
+    missing_items = []
+
+    if not email_detected:
+        missing_items.append(
+            "email"
+        )
+
+    if not phone_detected:
+        missing_items.append(
+            "phone"
+        )
+
+    if not linkedin_detected:
+        missing_items.append(
+            "LinkedIn"
+        )
+
+    if not location_detected:
+        missing_items.append(
+            "location"
+        )
+
+    if not portfolio_detected:
+        missing_items.append(
+            "portfolio"
+        )
+
+    return {
+        "email": email_detected,
+        "phone": phone_detected,
+        "linkedin": linkedin_detected,
+        "location": location_detected,
+        "portfolio": portfolio_detected,
+        "detected_count": detected_count,
+        "total_items": 5,
+        "missing_items": missing_items,
+    }
 
 
 # ============================================================
@@ -281,7 +443,10 @@ def _score_experience(
     elif technical_count >= 1:
         score += 1
 
-    return min(score, 20)
+    return min(
+        score,
+        20,
+    )
 
 
 # ============================================================
@@ -378,7 +543,10 @@ def _score_education(
     ):
         score += 1
 
-    return min(score, 10)
+    return min(
+        score,
+        10,
+    )
 
 
 # ============================================================
@@ -476,7 +644,10 @@ def _score_projects(
 
     # Measurable project impact is intentionally handled
     # by _score_impact(), not duplicated here.
-    return min(score, 15)
+    return min(
+        score,
+        15,
+    )
 
 
 # ============================================================
@@ -552,7 +723,10 @@ def _score_certifications(
     ):
         score += 1
 
-    return min(score, 5)
+    return min(
+        score,
+        5,
+    )
 
 
 # ============================================================
@@ -657,17 +831,26 @@ def _score_structure(
         )
     )
 
-    if has_email and has_phone and has_linkedin:
+    if (
+        has_email
+        and has_phone
+        and has_linkedin
+    ):
         score += 1
 
-    return min(score, 10)
+    return min(
+        score,
+        10,
+    )
 
 
 # ============================================================
 # IMPACT HELPERS
 # ============================================================
 
-def _is_academic_line(line: str) -> bool:
+def _is_academic_line(
+    line: str,
+) -> bool:
     """Prevent academic information from counting as impact."""
 
     lower_line = line.lower()
@@ -696,7 +879,9 @@ def _is_academic_line(line: str) -> bool:
     )
 
 
-def _contains_metric(line: str) -> bool:
+def _contains_metric(
+    line: str,
+) -> bool:
     """Detect real measurable evidence."""
 
     patterns = [
@@ -832,7 +1017,10 @@ def _score_impact(
         3,
     )
 
-    return min(score, 10)
+    return min(
+        score,
+        10,
+    )
 
 
 # ============================================================
@@ -874,7 +1062,10 @@ def _build_category_results(
                 break
 
         results[category] = {
-            "score": round(score, 1),
+            "score": round(
+                score,
+                1,
+            ),
             "maximum": weight,
             "percentage": round(
                 percentage,
@@ -949,7 +1140,9 @@ def calculate_ats_score(
     }
 
     total_score = round(
-        sum(breakdown.values()),
+        sum(
+            breakdown.values()
+        ),
         1,
     )
 
@@ -969,6 +1162,10 @@ def calculate_ats_score(
         breakdown
     )
 
+    contact_details = _get_contact_details(
+        resume_text
+    )
+
     return {
         "score": total_score,
         "breakdown": breakdown,
@@ -976,4 +1173,5 @@ def calculate_ats_score(
         "rating_class": rating_class,
         "categories": categories,
         "weights": WEIGHTS,
+        "contact_details": contact_details,
     }
